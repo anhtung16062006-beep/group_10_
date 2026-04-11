@@ -206,20 +206,7 @@ tr:hover td{background:#fafafa;}
         </div>
         <div id="dashAlerts"></div>
         <div class="chart-row">
-          <div class="card">
-            <div class="card-header"><span class="card-title">Nhập/Xuất 7 ngày gần nhất</span></div>
-            <div class="card-body">
-              <div style="display:flex;gap:16px;margin-bottom:12px;">
-                <span style="display:flex;align-items:center;gap:6px;font-size:12px;"><span style="width:12px;height:12px;background:var(--success);border-radius:2px;display:inline-block;"></span>Nhập kho</span>
-                <span style="display:flex;align-items:center;gap:6px;font-size:12px;"><span style="width:12px;height:12px;background:var(--primary);border-radius:2px;display:inline-block;"></span>Xuất kho</span>
-              </div>
-              <div id="chart7days" style="display:flex;align-items:flex-end;gap:8px;height:100px;padding-bottom:20px;"></div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-header"><span class="card-title">Tồn kho thấp</span></div>
-            <div class="card-body" id="lowStockList"></div>
-          </div>
+          
         </div>
         <div class="mt-16">
           <div class="card">
@@ -886,41 +873,9 @@ async function loadDashboard(){
   if(low.length) html+=`<div class="alert alert-warning">⚡ Có <b>${low.length}</b> sản phẩm sắp hết hàng</div>`;
   document.getElementById('dashAlerts').innerHTML=html;
 
-  document.getElementById('lowStockList').innerHTML = low_stock.slice(0,5).map(p=>{
-    const pct=Math.min(100,Math.max(2,Math.round((p.current_stock/Math.max(1,p.min_stock*3))*100)));
-    const color=p.stock_status==='out'?'var(--danger)':p.stock_status==='low'?'var(--warning)':'var(--success)';
-    return `<div style="margin-bottom:14px;">
-      <div class="flex-between" style="margin-bottom:4px;">
-        <span style="font-size:13px;">${p.name}</span>
-        <span style="font-size:13px;font-weight:600;color:${color};">${fmtNum(p.current_stock)}</span>
-      </div>
-      <div class="stock-bar"><div class="stock-fill" style="width:${pct}%;background:${color};"></div></div>
-    </div>`;
-  }).join('') || '<p class="text-muted" style="font-size:13px;">Tất cả sản phẩm đủ hàng ✓</p>';
+  
 
-  // Chart 7 ngày
-  const chart=[];
-  for(let i=6;i>=0;i--){
-    const d=daysAgo(i);
-    chart.push({
-      day_date:d,
-      import_qty:imports_all.filter(r=>r.import_date===d).reduce((s,r)=>s+r.quantity,0),
-      export_qty:exports_all.filter(r=>r.export_date===d).reduce((s,r)=>s+r.quantity,0),
-    });
-  }
-  const maxVal=Math.max(1,...chart.map(r=>Math.max(r.import_qty,r.export_qty)));
-  document.getElementById('chart7days').innerHTML=chart.map(r=>{
-    const hIn=Math.max(4,Math.round((r.import_qty/maxVal)*90));
-    const hOut=Math.max(4,Math.round((r.export_qty/maxVal)*90));
-    const day=new Date(r.day_date).getDate();
-    return `<div style="display:flex;flex-direction:column;align-items:center;gap:3px;flex:1;">
-      <div style="display:flex;align-items:flex-end;gap:2px;height:90px;">
-        <div style="width:14px;height:${hIn}px;background:var(--success);border-radius:3px 3px 0 0;opacity:.85;" title="Nhập:${r.import_qty}"></div>
-        <div style="width:14px;height:${hOut}px;background:var(--primary);border-radius:3px 3px 0 0;opacity:.85;" title="Xuất:${r.export_qty}"></div>
-      </div>
-      <span style="font-size:10px;color:var(--text-muted);">${day}</span>
-    </div>`;
-  }).join('');
+
 
   // Recent transactions
   const users_all=await dbGetAll('users');
