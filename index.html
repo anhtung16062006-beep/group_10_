@@ -165,14 +165,14 @@ tr:hover td{background:#fafafa;}
       <div class="nav-section">
         <div class="nav-label">Kho hàng</div>
         <div class="nav-item" onclick="showPage('products')"><span class="nav-icon">👕</span> Quản lý sản phẩm</div>
-        <div class="nav-item" onclick="showPage('import')"><span class="nav-icon">📦</span> Nhập kho</div>
-        <div class="nav-item" onclick="showPage('export')"><span class="nav-icon">🚚</span> Xuất kho</div>
-        <div class="nav-item" onclick="showPage('inventory')"><span class="nav-icon">🔍</span> Tồn kho</div>
-        <div class="nav-item" onclick="showPage('stockcheck')"><span class="nav-icon">📋</span> Kiểm kê kho</div>
+        <div class="nav-item" onclick="showPage('import')"><span class="nav-icon">📦</span> Quản lý nhập kho</div>
+        <div class="nav-item" onclick="showPage('export')"><span class="nav-icon">🚚</span> Quản lý xuất kho</div>
+        <div class="nav-item" onclick="showPage('inventory')"><span class="nav-icon">🔍</span> Quản lý tồn kho </div>
+  
       </div>
       <div class="nav-section">
         <div class="nav-label">Quản trị</div>
-        <div class="nav-item admin-only" onclick="showPage('users')"><span class="nav-icon">👥</span> Nhân viên</div>
+        <div class="nav-item admin-only" onclick="showPage('users')"><span class="nav-icon">👥</span> Quản lý tài khoản đăng nhập</div>
         <div class="nav-item" onclick="showPage('report')"><span class="nav-icon">📈</span> Báo cáo & Thống kê</div>
       </div>
     </nav>
@@ -300,14 +300,6 @@ tr:hover td{background:#fafafa;}
         </div>
       </div>
 
-      <!-- STOCK CHECK -->
-      <div class="page" id="page-stockcheck">
-        <div class="flex-between mb-16">
-          <h3 style="font-size:14px;font-weight:600;">Kiểm kê kho</h3>
-          <button class="btn btn-primary" onclick="runStockCheck()">🔄 Chạy kiểm kê</button>
-        </div>
-        <div id="stockCheckResult"><div class="empty-state"><div class="empty-icon">📋</div><p>Nhấn "Chạy kiểm kê" để bắt đầu</p></div></div>
-      </div>
 
       <!-- USERS -->
       <div class="page" id="page-users">
